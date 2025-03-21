@@ -6,16 +6,29 @@
  * 
  * 
  * Non code based questions :
- * 
+ * Need to do part 1-3 up to q35
  * 1. The busieset times of the day are 10am(227), 2pm(227), 6pm(237)
  * 
+ * 2. Person[] people;
  * 
+ * 3. boolean[] vacant;
  * 
+ * 4. There are 4 square brackets;
  * 
+ * 5.int[] counts;// Corrected declaration for an integer array
+ * boolean[] occupied = new boolean[5000];
+ * // Corrected declaration and initialization for a boolean array
  * 
+ * 6.
+ * a)readings = new double[60];
+ * b)urls = new String[90];
+ * c)machines = new TicketMachine[5];
  * 
+ * 7. 20
  * 
+ * 8. Corrected version : double[] prices = new double[50];
  * 
+ * 9.
  * 
  */
 
