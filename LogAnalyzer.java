@@ -28,7 +28,19 @@
  * 
  * 8. Corrected version : double[] prices = new double[50];
  * 
- * 9.
+ * 9. When trying to call the method with a wrongly written loop,
+ * I got sent straight to the line of code.
+ * 
+ * 
+ * 11. Corrected Ver
+ * public void printGreater(double[] marks, double mean) {
+ *   for (int index = 0; index < marks.length; index++) {  
+ *       if (marks[index] > mean) {
+ *           System.out.println(marks[index]);
+ *       }
+ *   }
+ * }
+ *
  * 
  */
 
@@ -67,14 +79,17 @@ public class LogAnalyzer
      * Print the hourly counts.
      * These should have been set with a prior
      * call to analyzeHourlyData.
+     * 10; 
      */
-    public void printHourlyCounts()
-    {
-        System.out.println("Hr: Count");
-        for(int hour = 0; hour < hourCounts.length; hour++) {
-            System.out.println(hour + ": " + hourCounts[hour]);
-        }
+    public void printHourlyCounts() {
+    System.out.println("Hr: Count");
+    int hour = 0;  
+    while (hour < hourCounts.length) {  
+        System.out.println(hour + ": " + hourCounts[hour]);
+        hour++; 
     }
+}
+
     
     /**
      * Print the lines of data read by the LogfileReader
