@@ -58,14 +58,14 @@ public class LogAnalyzer {
         // Create the array object to hold the hourly access counts.
         hourCounts = new int[24];
         // Create the reader to obtain the data from the specified log file.
-        reader = new LogfileReader(logFilename);
+        reader = new LogfileReader(logFilename);  // Pass filename to LogfileReader
     }
 
     /**
      * Analyze the hourly access data from the log file.
      */
     public void analyzeHourlyData() {
-        while(reader.hasNext()) {
+        while (reader.hasNext()) {
             LogEntry entry = reader.next();
             int hour = entry.getHour();
             hourCounts[hour]++;
@@ -91,3 +91,4 @@ public class LogAnalyzer {
         reader.printData();
     }
 }
+
