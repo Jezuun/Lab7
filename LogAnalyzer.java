@@ -3,7 +3,22 @@
  * 
  * @author David J. Barnes and Michael Kölling.
  * @version    2016.02.29
+ * 
+ * 
+ * Non code based questions :
+ * 
+ * 1. The busieset times of the day are 10am(227), 2pm(227), 6pm(237)
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  */
+
 public class LogAnalyzer
 {
     // Where to calculate the hourly access counts.
