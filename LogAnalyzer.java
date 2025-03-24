@@ -41,29 +41,19 @@
  *   }
  * }
  *
+ *15. a for loop is better
  * 
  */
 
 public class LogAnalyzer {
-    // Where to calculate the hourly access counts.
     private int[] hourCounts;
-    // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
-    /**
-     * Create an object to analyze hourly web accesses.
-     * @param logFilename The name of the log file to analyze.
-     */
     public LogAnalyzer(String logFilename) { 
-        // Create the array object to hold the hourly access counts.
         hourCounts = new int[24];
-        // Create the reader to obtain the data from the specified log file.
-        reader = new LogfileReader(logFilename);  // Pass filename to LogfileReader
+        reader = new LogfileReader(logFilename);  
     }
 
-    /**
-     * Analyze the hourly access data from the log file.
-     */
     public void analyzeHourlyData() {
         while (reader.hasNext()) {
             LogEntry entry = reader.next();
@@ -73,9 +63,86 @@ public class LogAnalyzer {
     }
 
     /**
+     * Find the hour with the most accesses.
+     * If multiple hours have the same max count, returns the first.
+     * @return The busiest hour.
+     */
+    public int busiestHour() {
+        int maxHour = 0;
+        int maxCount = hourCounts[0];
+
+        for (int hour = 1; hour < hourCounts.length; hour++) {  
+            if (hourCounts[hour] > maxCount) {
+                maxCount = hourCounts[hour];
+                maxHour = hour;
+            }
+        }
+        return maxHour;
+    }
+
+    /**
+     * Find the hour with the least accesses.
+     * If multiple hours have the same min count, returns the first.
+     * @return The quietest hour.
+     */
+    public int quietestHour() {
+        int minHour = 0;
+        int minCount = Integer.MAX_VALUE; // Large initial value
+
+        for (int hour = 0; hour < hourCounts.length; hour++) {  
+            if (hourCounts[hour] > 0 && hourCounts[hour] < minCount) { // Avoid zero if necessary
+                minCount = hourCounts[hour];
+                minHour = hour;
+            }
+        }
+        return minHour;
+    }
+
+    /**
+     * Find the busiest two-hour period.
+     * @return The starting hour of the busiest period.
+     */
+    public int busiestTwoHourPeriod() {
+        int maxStartHour = 0;
+        int maxCount = 0;
+
+        for (int hour = 0; hour < hourCounts.length - 1; hour++) {  
+            int sum = hourCounts[hour] + hourCounts[hour + 1];
+            if (sum > maxCount) {
+                maxCount = sum;
+                maxStartHour = hour;
+            }
+        }
+        return maxStartHour;
+    }
+
+    /**
+     * Print the busiest hour and its count.
+     */
+    public void printBusiestHour() {
+        int busiest = busiestHour();
+        System.out.println("Busiest hour: " + busiest + " with " + hourCounts[busiest] + " accesses.");
+    }
+
+    /**
+     * Print the quietest hour and its count.
+     */
+    public void printQuietestHour() {
+        int quietest = quietestHour();
+        System.out.println("Quietest hour: " + quietest + " with " + hourCounts[quietest] + " accesses.");
+    }
+
+    /**
+     * Print the busiest two-hour period.
+     */
+    public void printBusiestTwoHourPeriod() {
+        int busiestPeriod = busiestTwoHourPeriod();
+        System.out.println("Busiest two-hour period starts at " + busiestPeriod + 
+            " with " + (hourCounts[busiestPeriod] + hourCounts[busiestPeriod + 1]) + " accesses.");
+    }
+
+    /**
      * Print the hourly counts.
-     * These should have been set with a prior
-     * call to analyzeHourlyData.
      */
     public void printHourlyCounts() {
         System.out.println("Hr: Count");
@@ -85,10 +152,31 @@ public class LogAnalyzer {
     }
 
     /**
-     * Print the lines of data read by the LogfileReader.
+     * Print the total number of accesses.
+     */
+    public void printTotalAccesses() {
+        System.out.println("Total number of accesses: " + numberOfAccesses());
+    }
+
+    /**
+     * Count the total number of accesses.
+     * @return The total number of accesses.
+     */
+    public int numberOfAccesses() {
+        int total = 0;
+        for (int count : hourCounts) {
+            total += count;
+        }
+        return total;
+    }
+
+    /**
+     * Print the log file data.
      */
     public void printData() {
         reader.printData();
     }
 }
+
+
 
